@@ -31,10 +31,11 @@ def download_mnist():
     """Download all MNIST files"""
     
     # List of mirror URLs (in order of preference)
+    # NOTE: Using direct MNIST sources to ensure we get DIGITS, not Fashion-MNIST
     mirrors = [
-        "https://storage.googleapis.com/tensorflow/tf-keras-datasets/",
-        "https://github.com/golbin/TensorFlow-MNIST/raw/master/mnist/data/",
-        "http://yann.lecun.com/exdb/mnist/",
+        "http://yann.lecun.com/exdb/mnist/",  # Original MNIST website
+        "https://github.com/fgnt/mnist/raw/master/",  # GitHub mirror
+        "https://ossci-datasets.s3.amazonaws.com/mnist/",  # AWS mirror
     ]
     
     files = [
