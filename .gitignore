@@ -1,6 +1,7 @@
 # MNIST Dataset
 mnist_data/
 *.gz
+debug_images
 
 # Trained Models
 *.pkl
@@ -44,6 +45,8 @@ env/
 ENV/
 env.bak/
 venv.bak/
+.venv
+
 
 # IDE
 .vscode/
