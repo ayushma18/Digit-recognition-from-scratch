@@ -49,6 +49,27 @@ display_prediction("my_digit.png", trained_parameters, invert=True)
 
 ## Troubleshooting
 
+### MNIST Download Issues
+
+**Problem:** "HTTP Error 404: Not Found" when downloading MNIST dataset
+- **Solution 1:** Run the standalone download script:
+  ```bash
+  python3 download_mnist.py
+  ```
+  This uses multiple mirror URLs including Google Cloud Storage.
+
+- **Solution 2:** Manually download files from:
+  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+  
+  Save all files to the `mnist_data/` folder.
+
+- **Solution 3:** The notebook now automatically tries multiple mirror URLs.
+
+### Image Upload Issues
+
 **Problem:** "Image not found"
 - **Solution:** Make sure the image is in the same folder as the notebook
 - Check the exact filename (including extension: .png, .jpg, etc.)
