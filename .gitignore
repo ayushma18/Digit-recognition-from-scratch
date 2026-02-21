@@ -1,17 +1,24 @@
 # MNIST Dataset
 mnist_data/
 *.gz
-debug_images
+
+# Debug and temporary files
+debug_images/
+*_prediction_summary.txt
 
 # Trained Models
 *.pkl
 trained_digit_recognizer.pkl
+model.pkl
 
-# Sample Images
+# Sample/Test Images
 *.png
 *.jpg
 *.jpeg
 !README_images/*.png
+
+# Backup notebooks
+*_backup.ipynb
 
 # Python
 __pycache__/
