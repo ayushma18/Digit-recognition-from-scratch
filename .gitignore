@@ -12,7 +12,6 @@ trained_digit_recognizer.pkl
 model.pkl
 
 # Sample/Test Images
-*.png
 *.jpg
 *.jpeg
 !README_images/*.png
