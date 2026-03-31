@@ -1,27 +1,140 @@
-# 🎯 Handwritten Digit Recognition - Quick Start Guide
+# Handwritten Digit Recognition From Scratch
 
-## How to Upload and Test Your Image
+A neural network that recognizes handwritten digits (0-9), built entirely from scratch using only NumPy — no TensorFlow, PyTorch, or Keras.
 
-### Step 1: Prepare Your Image
-1. Draw or write a digit (0-9) on paper and take a photo, or create a digital image
-2. Save it as PNG, JPG, or JPEG format
-3. The digit should be clearly visible
+## How It Works
 
-### Step 2: Place the Image
-- Put your image file in this directory: `/home/ayushma/test/AI/Digit_Recognition/`
-- You can drag and drop it into VS Code's file browser
+- Trains a neural network (ReLU + Softmax) on the MNIST dataset (60,000 training images)
+- Achieves ~95-97% accuracy on the test set
+- Accepts your own handwritten digit images for prediction
+- Training takes ~2-5 minutes; prediction is instant
 
-### Step 3: Run the Notebook
-1. Open `digit_recognition_from_scratch.ipynb`
-2. Run all cells in order (this trains the neural network)
-3. Go to the cells at the **end of the notebook** titled "Test Your Own Image Now!"
-4. Update the filename in the cell: `my_image = "your_image.png"`
-5. Set the color inversion:
-   - `invert = True` for BLACK digit on WHITE background (most common)
-   - `invert = False` for WHITE digit on BLACK background
-6. Run the cell!
+**No ML libraries used** — only NumPy (math), Matplotlib (visualization), and PIL (image loading).
 
-### Expected Output
+---
+
+## Project Structure
+
+```
+Digit-recognition-from-scratch/
+├── digit_recognition_from_scratch.ipynb   # Main notebook — train & predict
+├── requirements.txt                       # Python dependencies
+└── mnist_data/                            # Created automatically on first run
+```
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.8 or higher
+- pip
+
+---
+
+### Linux Setup
+
+**1. Clone the repository**
+```bash
+git clone <repo-url>
+cd Digit-recognition-from-scratch
+```
+
+**2. Create and activate a virtual environment**
+```bash
+python3 -m venv myenv
+source myenv/bin/activate
+```
+
+**3. Install dependencies**
+
+Install only the core packages needed to run the notebook:
+```bash
+pip install numpy matplotlib pillow jupyter
+```
+
+Or install everything from requirements.txt:
+```bash
+pip install -r requirements.txt
+```
+
+**4. Launch the notebook**
+```bash
+jupyter notebook digit_recognition_from_scratch.ipynb
+```
+
+The notebook will automatically download the MNIST dataset (~55 MB) on first run.
+
+---
+
+### Windows Setup
+
+**1. Clone the repository**
+```cmd
+git clone <repo-url>
+cd Digit-recognition-from-scratch
+```
+
+**2. Create and activate a virtual environment**
+```cmd
+python -m venv myenv
+myenv\Scripts\activate
+```
+
+> If you get a script execution policy error in PowerShell, run:
+> ```powershell
+> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+
+**3. Install dependencies**
+
+Install only the core packages needed to run the notebook:
+```cmd
+pip install numpy matplotlib pillow jupyter
+```
+
+Or install everything from requirements.txt:
+```cmd
+pip install -r requirements.txt
+```
+
+**4. Launch the notebook**
+```cmd
+jupyter notebook digit_recognition_from_scratch.ipynb
+```
+
+The notebook will automatically download the MNIST dataset (~55 MB) on first run.
+
+---
+
+## Training the Model
+
+Once the notebook is open in your browser:
+
+1. Run all cells from top to bottom — this downloads the data, trains the network, and saves the model
+2. Training takes about 2-5 minutes
+3. A live Gradio interface launches at the end so you can draw and test digits directly in the browser
+
+---
+
+## Testing Your Own Image
+
+At the end of the notebook, find the **"Test Your Own Image"** section:
+
+1. Place your image file in the same folder as the notebook
+2. Update the filename in the cell:
+   ```python
+   my_image = "your_digit.png"
+   ```
+3. Set the color inversion:
+   ```python
+   invert = True   # black digit on white background (most common)
+   invert = False  # white digit on black background
+   ```
+4. Run the cell
+
+**Expected output:**
 ```
 ============================================================
 The uploaded handwritten digit is recognized as: 5
@@ -29,88 +142,78 @@ The uploaded handwritten digit is recognized as: 5
 Confidence Level: 98.76%
 ```
 
-Plus visual display showing:
-- Your original image
-- Processed 28×28 image
-- Probability distribution bar chart
+---
 
-## Quick Examples
+## Image Preparation Tips
 
-### Example 1: Black digit on white background
-```python
-my_image = "my_handwritten_7.png"
-invert = True  # Invert colors
-```
+- Draw a single digit (0-9) clearly on paper and photograph it, or create a digital image
+- Accepted formats: PNG, JPG, JPEG
+- The digit should be centered and clearly visible
+- Use a dark/thick pen for best results
+- Crop the image to focus on the digit
+- Good lighting helps if using a photo
 
-### Example 2: Use the one-line shortcut
-```python
-display_prediction("my_digit.png", trained_parameters, invert=True)
-```
+---
 
 ## Troubleshooting
 
-### MNIST Download Issues
+**MNIST download fails (404 error)**
 
-**Problem:** "HTTP Error 404: Not Found" when downloading MNIST dataset
-- **Solution 1:** Run the standalone download script:
-  ```bash
-  python3 download_mnist.py
-  ```
-  This uses multiple mirror URLs including Google Cloud Storage.
+The notebook tries multiple mirrors automatically. If all fail, download these files manually:
+- `train-images-idx3-ubyte.gz`
+- `train-labels-idx1-ubyte.gz`
+- `t10k-images-idx3-ubyte.gz`
+- `t10k-labels-idx1-ubyte.gz`
 
-- **Solution 2:** Manually download files from:
-  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
-  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
-  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
-  - https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
-  
-  Save all files to the `mnist_data/` folder.
+From: `https://storage.googleapis.com/tensorflow/tf-keras-datasets/`
 
-- **Solution 3:** The notebook now automatically tries multiple mirror URLs.
+Save all four files into the `mnist_data/` folder, then re-run the notebook.
 
-### Image Upload Issues
+---
 
-**Problem:** "Image not found"
-- **Solution:** Make sure the image is in the same folder as the notebook
-- Check the exact filename (including extension: .png, .jpg, etc.)
-- The filename is case-sensitive
+**Wrong prediction**
 
-**Problem:** Wrong prediction
-- **Solution:** Check the `invert` setting
-- If your digit is black on white, use `invert=True`
-- If your digit is white on black, use `invert=False`
-- Make sure the digit is clearly visible and centered
+- Check the `invert` setting — this is the most common cause
+  - Black digit on white paper → `invert=True`
+  - White digit on black background → `invert=False`
+- Make sure the digit is clearly visible and reasonably centered
 
-**Problem:** Low confidence
-- **Solution:** 
-  - Draw the digit more clearly
-  - Use a darker/thicker pen or marker
-  - Ensure good lighting in the photo
-  - Crop the image to show mainly the digit
+---
 
-## What Happens Behind the Scenes
+**Low confidence score**
 
-1. **Image Loading**: PIL loads your image file
-2. **Preprocessing**: 
-   - Convert to grayscale
-   - Resize to 28×28 pixels
-   - Optionally invert colors
-   - Normalize pixel values to [0, 1]
-3. **Prediction**: Neural network processes the 784-pixel input
-4. **Output**: 
-   - Forward propagation through trained network
-   - Softmax activation gives probability for each digit
-   - Highest probability is the prediction
+- Draw the digit more clearly with a thicker pen
+- Crop the image so the digit fills most of the frame
+- Ensure good lighting when photographing
 
-## Performance
-- Expected accuracy: 95-97% on test data
-- Training time: ~2-5 minutes (10 epochs)
-- Prediction time: Instant (<0.1 seconds)
+---
 
-## No ML Libraries!
-This is built completely from scratch using only:
-- NumPy (for math)
-- Matplotlib (for visualization)
-- PIL (for image loading)
+**Jupyter not found**
 
-**No TensorFlow, PyTorch, or Keras!** 🎉
+```bash
+pip install jupyter notebook
+```
+
+---
+
+## How the Neural Network Works
+
+1. **Input**: 28×28 grayscale image → flattened to 784 values, normalized to [0, 1]
+2. **Hidden layers**: configurable architecture with ReLU activation (default: 784 → 256 → 128 → 10)
+3. **Output layer**: 10 neurons with Softmax activation (one per digit)
+4. **Training**: mini-batch gradient descent with backpropagation, cross-entropy loss, hyperparameter tuning via random search
+5. **Prediction**: digit with the highest probability is returned
+
+---
+
+## Dependencies
+
+Core requirements (minimal install):
+| Package | Purpose |
+|---------|---------|
+| numpy | All math and matrix operations |
+| matplotlib | Visualizing training progress and predictions |
+| pillow | Loading and preprocessing image files |
+| jupyter | Running the notebook |
+
+The `requirements.txt` includes additional packages (gradio, fastapi, etc.) from the development environment — you do not need all of them to run the notebook.
